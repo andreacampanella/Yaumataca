@@ -81,13 +81,13 @@ class RightControllerPort : public ControllerPortInterface {
     }
 
     void set_port_state(ControllerPortState &state) override {
-        gpio_put(7, state.fire2); // Also used as Pot X
-        gpio_put(9, state.fire1);
-        gpio_put(15, state.up);
-        gpio_put(11, state.fire3); // Also used as Pot Y
-        gpio_put(14, state.down);
-        gpio_put(12, state.left);
-        gpio_put(10, state.right);
+        gpio_put(7, !state.fire2); // Also used as Pot X
+        gpio_put(9, !state.fire1);
+        gpio_put(15, !state.up);
+        gpio_put(11, !state.fire3); // Also used as Pot Y
+        gpio_put(14, !state.down);
+        gpio_put(12, !state.left);
+        gpio_put(10, !state.right);
 
         PRINTF("R %d%d%d%d %d%d%d\n", state.left, state.up, state.down, state.right, state.fire1, state.fire2,
                state.fire3);
@@ -156,13 +156,13 @@ class LeftControllerPort : public ControllerPortInterface {
     }
 
     void set_port_state(ControllerPortState &state) {
-        gpio_put(0, state.right);
-        gpio_put(1, state.left);
-        gpio_put(2, state.down);
-        gpio_put(3, state.up);
-        gpio_put(4, state.fire1);
-        gpio_put(5, state.fire3); // Also used as Pot Y
-        gpio_put(6, state.fire2); // Also used as Pot X
+        gpio_put(0, !state.right);
+        gpio_put(1, !state.left);
+        gpio_put(2, !state.down);
+        gpio_put(3, !state.up);
+        gpio_put(4, !state.fire1);
+        gpio_put(5, !state.fire3); // Also used as Pot Y
+        gpio_put(6, !state.fire2); // Also used as Pot X
 
         PRINTF("L %d%d%d%d %d%d%d\n", state.left, state.up, state.down, state.right, state.fire1, state.fire2,
                state.fire3);
